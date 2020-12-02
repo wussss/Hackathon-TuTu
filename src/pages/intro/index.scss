@@ -1,0 +1,29 @@
+@import '../../base.scss';
+
+.index {
+  height: 100%;
+  color: $text-color;
+  @include flex-column;
+  .hello {
+    /* prettier-ignore */
+    margin-top:10PX;
+    width: 15PX;
+    /* prettier-ignore */
+    line-height: 30PX;
+  }
+  .iconfont {
+    color: $primary-color;
+    /* prettier-ignore */
+    font-size: 15PX;
+    /* prettier-ignore */
+    @include flex-row;
+    /* prettier-ignore */
+    width: 50PX;
+  }
+  .footImage {
+    width: 100%;
+    /* prettier-ignore */
+    height:150PX;
+    margin-bottom: 0;
+  }
+}

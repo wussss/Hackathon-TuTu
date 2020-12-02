@@ -1,0 +1,16 @@
+{
+  "id": "2243950",
+  "name": "TuTu",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "18042476",
+      "name": "进入发送",
+      "font_class": "jinrufasong",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    }
+  ]
+}
