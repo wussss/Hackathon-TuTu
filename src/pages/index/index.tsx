@@ -7,9 +7,9 @@ import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 
 const before =
-  'https://cdn.pixabay.com/photo/2020/04/11/19/47/clouds-over-the-mountains-5031782_960_720.jpg'
+  'https://cdn.pixabay.com/photo/2016/02/18/18/37/puppy-1207816_960_720.jpg'
 const after =
-  'https://cdn.pixabay.com/photo/2020/08/12/07/09/landscape-5481816_960_720.jpg'
+  'https://i.ibb.co/XyqHJMp/Wechat-IMG5.jpg'
 const Index: Taro.FC = () => {
   const [isUpdate, setUpdate] = useState(false)
   return (

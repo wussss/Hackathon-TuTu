@@ -1,12 +1,11 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect } from 'react'
 import { View, Text } from '@tarojs/components'
-import footImg from '../../res/images/foot.png'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 
 let timer: NodeJS.Timeout
-
+const footImg = 'https://i.loli.net/2020/12/03/TRBiPAvamN9WzI8.png'
 const Intro: Taro.FC = () => {
   const toNextPage = () => {
     clearTimeout(timer)
