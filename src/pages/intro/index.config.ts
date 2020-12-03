@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: "图图TuTu",
-};
+  navigationBarTitleText: '图图',
+}

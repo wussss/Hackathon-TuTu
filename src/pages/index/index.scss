@@ -22,9 +22,6 @@ $button: '../../res/images/button.png';
     left:5PX;
   }
   .image_example {
-    position: fixed;
-    top: 0;
-    left: 0;
     /* prettier-ignore */
     width:100%;
     /* prettier-ignore */
@@ -51,5 +48,30 @@ $button: '../../res/images/button.png';
     line-height: 35PX;
     /* prettier-ignore */
     box-shadow:1PX 1PX 3PX 3PX rgba(98, 101, 103, 0.2);
+  }
+  .list {
+    @include flex-row;
+    :first-child {
+      color: $primary-color;
+    }
+  }
+  .upload {
+    /* prettier-ignore */
+    width: 200PX;
+    /* prettier-ignore */
+    height: 30PX;
+    /* prettier-ignore */
+    border-radius: 10PX;
+    background: $primary-color;
+    color: white;
+    text-align: center;
+    /* prettier-ignore */
+    line-height: 30PX;
+  }
+  Text {
+    color: $text-color;
+    opacity: 0.3;
+    /* prettier-ignore */
+    font-size: 10PX;
   }
 }

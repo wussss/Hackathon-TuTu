@@ -1,0 +1,17 @@
+@import '../base.scss';
+
+.example {
+  /* prettier-ignore */
+  width:130PX;
+  /* prettier-ignore */
+  height:50PX;
+  text-align: center;
+  /* prettier-ignore */
+  line-height: 50PX;
+  /* prettier-ignore */
+  border-radius:10PX;
+  background: white;
+  border: 1px solid $primary-color;
+  /* prettier-ignore */
+  margin-right:10PX;
+}
