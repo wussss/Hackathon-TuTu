@@ -41,6 +41,8 @@
     "@tarojs/react": "3.0.15",
     "@tarojs/runtime": "3.0.15",
     "@tarojs/taro": "3.0.15",
+    "@types/classnames": "^2.2.11",
+    "classnames": "^2.2.6",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
     "react-redux": "^7.2.0",

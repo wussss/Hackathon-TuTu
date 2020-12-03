@@ -1,7 +1,42 @@
 @import '../../base.scss';
+$logo: '../../res/images/logo.png';
+$before: '../../res/images/before.jpeg';
+$after: '../../res/images/after.jpeg';
 
 .index {
   height: 100%;
+  width: 100%;
   color: $text-color;
   @include flex-column;
+  .image_example {
+    background-image: url($before);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* prettier-ignore */
+    width:350PX;
+    /* prettier-ignore */
+    height:350PX;
+    transition: background-image 2s;
+    transition-timing-function: linear;
+    &.update {
+      background-image: url($after);
+      transition: background-image 2s;
+      transition-timing-function: linear;
+    }
+  }
+  .logo {
+    background: url($logo) center no-repeat;
+    background-size: cover;
+    /* prettier-ignore */
+    width:140PX;
+    /* prettier-ignore */
+    height:140PX;
+    /* prettier-ignore */
+    opacity: 0.5;
+    z-index: 5 !important;
+    position: fixed;
+    /* prettier-ignore */
+    left:5PX;
+  }
 }

@@ -1257,6 +1257,11 @@
   resolved "https://npm-registry.llsengineer.com/@types%2farchy/-/archy-0.0.31.tgz#01650a4641e7e1d11dbd64eda42eec9a2f829c7f"
   integrity sha1-AWUKRkHn4dEdvWTtpC7smi+CnH8=
 
+"@types/classnames@^2.2.11":
+  version "2.2.11"
+  resolved "https://npm-registry.llsengineer.com/@types%2fclassnames/-/classnames-2.2.11.tgz#2521cc86f69d15c5b90664e4829d84566052c1cf"
+  integrity sha1-JSHMhvadFcW5BmTkgp2EVmBSwc8=
+
 "@types/debug@^4.1.5":
   version "4.1.5"
   resolved "https://npm-registry.llsengineer.com/@types%2fdebug/-/debug-4.1.5.tgz#b14efa8852b7768d898906613c23f688713e02cd"
@@ -2656,7 +2661,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://npm-registry.llsengineer.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=

@@ -16,11 +16,11 @@ const Intro: Taro.FC = () => {
   }
 
   useEffect(() => {
-    // timer = setTimeout(toNextPage, 2000)
+    timer = setTimeout(toNextPage, 1000)
   }, [])
 
   return (
-    <View className="index">
+    <View className="intro">
       <View className="hello">这里是图图的产品介绍</View>
       <View className="iconfont icon-jinrufasong" onClick={toNextPage}>
         <Text>跳过</Text>

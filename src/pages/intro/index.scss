@@ -1,6 +1,6 @@
 @import '../../base.scss';
 
-.index {
+.intro {
   height: 100%;
   color: $text-color;
   @include flex-column;
@@ -10,6 +10,7 @@
     width: 15PX;
     /* prettier-ignore */
     line-height: 30PX;
+    font-family:''
   }
   .iconfont {
     color: $primary-color;
