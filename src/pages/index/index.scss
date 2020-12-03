@@ -1,30 +1,12 @@
 @import '../../base.scss';
 $logo: '../../res/images/logo.png';
-$before: '../../res/images/before.jpeg';
-$after: '../../res/images/after.jpeg';
+$button: '../../res/images/button.png';
 
 .index {
   height: 100%;
   width: 100%;
   color: $text-color;
   @include flex-column;
-  .image_example {
-    background-image: url($before);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* prettier-ignore */
-    width:350PX;
-    /* prettier-ignore */
-    height:350PX;
-    transition: background-image 2s;
-    transition-timing-function: linear;
-    &.update {
-      background-image: url($after);
-      transition: background-image 2s;
-      transition-timing-function: linear;
-    }
-  }
   .logo {
     background: url($logo) center no-repeat;
     background-size: cover;
@@ -38,5 +20,36 @@ $after: '../../res/images/after.jpeg';
     position: fixed;
     /* prettier-ignore */
     left:5PX;
+  }
+  .image_example {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* prettier-ignore */
+    width:100%;
+    /* prettier-ignore */
+    height: 350PX;
+    overflow: hidden;
+  }
+  .change {
+    /* prettier-ignore */
+    width:35PX;
+    /* prettier-ignore */
+    height:35PX;
+    background: url($button) center no-repeat;
+    background-size: cover;
+    position: fixed;
+    /* prettier-ignore */
+    right:5PX;
+    /* prettier-ignore */
+    top:310PX;
+    color: $primary-color;
+    /* prettier-ignore */
+    font-size: 20PX;
+    text-align: center;
+    /* prettier-ignore */
+    line-height: 35PX;
+    /* prettier-ignore */
+    box-shadow:1PX 1PX 3PX 3PX rgba(98, 101, 103, 0.2);
   }
 }

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9792434",
+      "name": "美颜",
+      "font_class": "meiyan1",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "772011",
+      "name": "美颜",
+      "font_class": "meiyan",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
       "icon_id": "18042476",
       "name": "进入发送",
       "font_class": "jinrufasong",
