@@ -7,6 +7,7 @@ $button: '../../res/images/button.png';
   width: 100%;
   color: $text-color;
   @include flex-column;
+  justify-content: space-between;
   .logo {
     background: url($logo) center no-repeat;
     background-size: cover;
@@ -21,57 +22,51 @@ $button: '../../res/images/button.png';
     /* prettier-ignore */
     left:5PX;
   }
-  .image_example {
-    /* prettier-ignore */
-    width:100%;
-    /* prettier-ignore */
-    height: 350PX;
-    overflow: hidden;
+  .display {
+    width: 100%;
+    height: 80%;
+    background: #d3d4d6;
+    @include flex-column;
   }
-  .change {
-    /* prettier-ignore */
-    width:35PX;
-    /* prettier-ignore */
-    height:35PX;
-    background: url($button) center no-repeat;
-    background-size: cover;
-    position: fixed;
-    /* prettier-ignore */
-    right:5PX;
-    /* prettier-ignore */
-    top:310PX;
-    color: $primary-color;
-    /* prettier-ignore */
-    font-size: 20PX;
-    text-align: center;
-    /* prettier-ignore */
-    line-height: 35PX;
-    /* prettier-ignore */
-    box-shadow:1PX 1PX 3PX 3PX rgba(98, 101, 103, 0.2);
-  }
-  .list {
+  .foot {
+    width: 100%;
+    height: 20%;
+    background: $primary-color;
     @include flex-row;
-    :first-child {
-      color: $primary-color;
+    overflow-x: scroll;
+    .make_up,.custom{
+      @include flex-column;
+      /* prettier-ignore */
+      width: 66PX;
+      /* prettier-ignore */
+      height: 80PX;
+      flex-shrink: 0;
+      /* prettier-ignore */
+      margin-left:8PX;
+      .make_up_item {
+        width: 100%;
+        /* prettier-ignore */
+        height:60PX;
+      }
+      .text {
+        background: #ad657d;
+        width: 100%;
+        /* prettier-ignore */
+        height:20PX;
+        color: white;
+        text-align: center;
+        /* prettier-ignore */
+        line-height: 20PX;
+      }
     }
   }
-  .upload {
-    /* prettier-ignore */
-    width: 200PX;
-    /* prettier-ignore */
-    height: 30PX;
-    /* prettier-ignore */
-    border-radius: 10PX;
-    background: $primary-color;
-    color: white;
-    text-align: center;
-    /* prettier-ignore */
-    line-height: 30PX;
-  }
-  Text {
+  .copyright {
     color: $text-color;
-    opacity: 0.3;
+    opacity: 0.5;
     /* prettier-ignore */
-    font-size: 10PX;
+    font-size: 13PX;
+    position: fixed;
+    /* prettier-ignore */
+    bottom:1PX;
   }
 }

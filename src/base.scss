@@ -1,10 +1,10 @@
-$primary-color: #ffd002;
+$primary-color: #f5b7b1;
 $text-color: #413e3e;
 $background-color: #f0f0f0;
 
 @mixin flex-row {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
 }
@@ -12,7 +12,7 @@ $background-color: #f0f0f0;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 @mixin background_image {
