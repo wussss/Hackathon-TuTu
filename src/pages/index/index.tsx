@@ -1,110 +1,120 @@
 import Taro from '@tarojs/taro'
-import React, { useState } from 'react'
-import { View, Text, Image } from '@tarojs/components'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Image, Button } from '@tarojs/components'
+import { baseUrl } from '../../config'
+import classnames from 'classnames'
+import { myList } from '../../constants/myList'
+import { Loading } from '../../components/Loading'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
+const custom = 'https://i.ibb.co/5sJSmPK/3.png'
+const example = 'https://i.ibb.co/4t741xf/test.jpg'
+
+interface IData {
+  url: string
+  status: number
+}
 const Index: Taro.FC = () => {
-  const list = [
-    {
-      id: 1,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '女团',
-    },
-    {
-      id: 2,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '裸妆',
-    },
-    {
-      id: 3,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '韩系',
-    },
-    {
-      id: 4,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '日系',
-    },
-    {
-      id: 5,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '艺术',
-    },
-    {
-      id: 6,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '泰妆',
-    },
-    {
-      id: 7,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '气质',
-    },
-    {
-      id: 8,
-      src:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      text: '欧美',
-    },
-  ]
-  var [customMakeUp, setCustom] = useState('')
-  var [makeupList, setList] = useState(list)
+  const [chooseID, setChoose] = useState(1000)
+  const [isFocus, setFocus] = useState(false)
+  //将预设存在localStorage里
+  // 当before变化时执行
+  useEffect(() => {
+    genPhoto(0)
+  }, [before])
+
+
+  var storageList = Taro.getStorageSync('makeuplist')
+  var [makeupList, setList] = useState(storageList ? storageList : myList) //妆面列表
+  var [before, setBefore] = useState(example) //妆前照片
+  var [after, setAfter] = useState('') //妆后照片
+
   const uploadMakeup = () => {
-    let imgSrc = customMakeUp
+    let customMakeUp = ''
     let list = makeupList
+    const mid: number = Date.now()
     wx.chooseImage({
       count: 1,
       sourceType: ['album', 'camera'],
       success: (res) => {
-        console.log(res.tempFilePaths)
-        imgSrc = res.tempFilePaths[0]
-        list.unshift({
-          id: 0,
-          src: imgSrc,
-          text: '自定义',
+        customMakeUp = res.tempFilePaths[0]
+        wx.uploadFile({
+          url: baseUrl + '/up_photo',
+          filePath: customMakeUp,
+          name: 'photo',
+          formData: {
+            makeup_id: mid,
+          },
+          header: {
+            'Content-Type': 'multipart/form-data',
+            accept: 'application/json',
+          },
+          success: function (res) {
+            const data: IData = JSON.parse(res.data)
+            list.unshift({
+              id: mid,
+              src: data.url,
+              text: '自定义',
+            })
+            setList(list)
+            Taro.setStorageSync('makeuplist', list)
+          },
+          fail: function (res) {
+            console.error(res)
+          },
         })
-        setCustom(imgSrc)
-        setList(list)
       },
     })
   }
-  const custom = 'https://i.ibb.co/c875vpH/image.png'
-  const previewImage = () => {
-    wx.previewImage({
-      current:
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg', // 当前显示图片的http链接
-      urls: [
-        'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg',
-      ], // 需要预览的图片http链接列表
+  const genPhoto = (id: number) => {
+    wx.uploadFile({
+      url: baseUrl + '/gen_photo',
+      filePath: before,
+      name: 'photo',
+      formData: {
+        target_id: id || 0,
+      },
+      header: {
+        'Content-Type': 'multipart/form-data',
+        accept: 'application/json',
+      },
+      success: function (res) {
+        const data: IData = JSON.parse(res.data)
+        setAfter(data.url)
+      },
+      fail: function (res) {
+        console.error(res)
+      },
     })
   }
-  var [display, setDisplay] = useState('')
   const uploadImg = () => {
     wx.chooseImage({
       count: 1,
       sourceType: ['album', 'camera'],
-      success: (res) => {
-        setDisplay(res.tempFilePaths[0])
+      success: async (res) => {
+        setBefore(res.tempFilePaths[0])
       },
     })
   }
-  var example = display
-    ? display
-    : 'https://cdn.pixabay.com/photo/2016/03/23/04/01/beautiful-1274056_1280.jpg'
+  const previewImage = () => {
+    wx.previewImage({
+      current: after ? after : before, // 当前显示图片的http链接
+      urls: [after ? after : before], // 需要预览的图片http链接列表
+    })
+  }
   return (
     <View className="index">
       <View className="logo" />
       <View className="display">
-        <Image src={example} onClick={previewImage} />
+        <Image
+          src={after ? after : before}
+          onClick={previewImage}
+          style={{
+            width: '100%',
+          }}
+          mode="widthFix"
+        />
       </View>
-      <View onClick={uploadImg}>上传妆前照片</View>
       <View className="foot">
         <View className="custom" onClick={uploadMakeup}>
           <View
@@ -118,7 +128,17 @@ const Index: Taro.FC = () => {
         </View>
         {makeupList.map((item) => {
           return (
-            <View className="make_up">
+            <View
+              className={classnames({
+                make_up: true,
+                choose: item.id === chooseID,
+              })}
+              onClick={() => {
+                genPhoto(item.id)
+                setChoose(item.id)
+                setFocus(!isFocus)
+              }}
+            >
               <View
                 key={item.id}
                 className="make_up_item"
@@ -131,6 +151,14 @@ const Index: Taro.FC = () => {
             </View>
           )
         })}
+      </View>
+      <View className="buttons">
+        <Button className="upload" onClick={uploadImg} size="mini">
+          上传照片
+        </Button>
+        <Button open-type="share" className="share" size="mini">
+          分享给朋友
+        </Button>
       </View>
       <Text className="copyright">©2020 Continue. All rights reserved.</Text>
     </View>

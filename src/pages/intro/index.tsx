@@ -1,11 +1,13 @@
 import Taro from '@tarojs/taro'
 import React, { useEffect } from 'react'
 import { View, Text } from '@tarojs/components'
+import { Loading } from '../../components/Loading'
+import { myList } from '../../constants/myList'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 
-let timer: NodeJS.Timeout
-const footImg = 'https://i.loli.net/2020/12/03/TRBiPAvamN9WzI8.png'
+let timer: number = 0
+const footImg = 'https://i.ibb.co/3RkCbFq/foot.png'
 const Intro: Taro.FC = () => {
   const toNextPage = () => {
     clearTimeout(timer)
@@ -15,14 +17,28 @@ const Intro: Taro.FC = () => {
   }
 
   useEffect(() => {
-    timer = setTimeout(toNextPage, 1000)
+    timer = setTimeout(toNextPage, 3000)
   }, [])
 
   return (
     <View className="intro">
-      <View className="hello">这里是图图的产品介绍</View>
+      <View className="hello">这里是图图美妆的宣传语</View>
+      <View className="loading">
+        <Loading />
+      </View>
       <View className="iconfont icon-jinrufasong" onClick={toNextPage}>
         <Text>跳过</Text>
+        {myList.map((item) => (
+          <View
+            key={item.id}
+            style={{
+              background: `url(${item.src}) center no-repeat`,
+              backgroundSize: 'cover',
+              width: '0',
+              height: '0',
+            }}
+          />
+        ))}
       </View>
       <View
         className="footImage"

@@ -7,10 +7,15 @@
   .hello {
     /* prettier-ignore */
     margin-top:10PX;
+    /* prettier-ignore */
     width: 15PX;
     /* prettier-ignore */
     line-height: 30PX;
-    font-family:''
+    font-family: '';
+  }
+  .loading {
+    position: fixed;
+    top: 50%;
   }
   .iconfont {
     color: $primary-color;
@@ -20,11 +25,15 @@
     @include flex-row;
     /* prettier-ignore */
     width: 50PX;
+    /* prettier-ignore */
+    Text{
+      margin-left:5PX;
+    }
   }
   .footImage {
     width: 100%;
     /* prettier-ignore */
-    height:150PX;
+    height:80PX;
     margin-bottom: 0;
   }
 }

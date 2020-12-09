@@ -1,7 +1,5 @@
 @import '../../base.scss';
 $logo: '../../res/images/logo.png';
-$button: '../../res/images/button.png';
-
 .index {
   height: 100%;
   width: 100%;
@@ -12,29 +10,38 @@ $button: '../../res/images/button.png';
     background: url($logo) center no-repeat;
     background-size: cover;
     /* prettier-ignore */
-    width:140PX;
+    width:100PX;
     /* prettier-ignore */
-    height:140PX;
+    height:100PX;
     /* prettier-ignore */
-    opacity: 0.5;
+    opacity: 0.8;
     z-index: 5 !important;
     position: fixed;
     /* prettier-ignore */
     left:5PX;
+    /* prettier-ignore */
+    top:5PX;
   }
   .display {
     width: 100%;
-    height: 80%;
-    background: #d3d4d6;
+    height: 75%;
+    background: #1e1e1f;
     @include flex-column;
+    overflow: hidden;
+    Image {
+      flex-shrink: 0;
+    }
   }
   .foot {
     width: 100%;
-    height: 20%;
+    height: 15%;
     background: $primary-color;
     @include flex-row;
     overflow-x: scroll;
-    .make_up,.custom{
+    /* prettier-ignore */
+    margin-top:10PX;
+    .make_up,
+    .custom {
       @include flex-column;
       /* prettier-ignore */
       width: 66PX;
@@ -43,6 +50,10 @@ $button: '../../res/images/button.png';
       flex-shrink: 0;
       /* prettier-ignore */
       margin-left:8PX;
+      &.choose {
+        /* prettier-ignore */
+        opacity:0.5;
+      }
       .make_up_item {
         width: 100%;
         /* prettier-ignore */
@@ -60,11 +71,46 @@ $button: '../../res/images/button.png';
       }
     }
   }
+  .buttons {
+    @include flex-row;
+    justify-content: space-around;
+    /* prettier-ignore */
+    margin-bottom:10PX;
+    width: 100%;
+    height: 10%;
+    .upload {
+      /* prettier-ignore */
+      height: 30PX;
+      /* prettier-ignore */
+      width:150PX;
+      text-align: center;
+      /* prettier-ignore */
+      line-height: 30PX;
+      /* prettier-ignore */
+      border-radius: 5PX;
+      background: $primary-color;
+      color: white;
+      /* prettier-ignore */
+    }
+    .share {
+      /* prettier-ignore */
+      height: 30PX;
+      /* prettier-ignore */
+      width:150PX;
+      text-align: center;
+      /* prettier-ignore */
+      line-height: 30PX;
+      /* prettier-ignore */
+      border-radius: 5PX;
+      background: $primary-color;
+      color: white;
+    }
+  }
   .copyright {
     color: $text-color;
     opacity: 0.5;
     /* prettier-ignore */
-    font-size: 13PX;
+    font-size: 10PX;
     position: fixed;
     /* prettier-ignore */
     bottom:1PX;
