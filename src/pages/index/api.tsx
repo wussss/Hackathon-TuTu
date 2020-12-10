@@ -20,9 +20,12 @@ export function genPhoto(id: string, before: string): Promise<string> {
         accept: 'application/json',
       },
       success: function (res) {
-        const data: IData = JSON.parse(res.data)
-        resolve(data.url)
-        // setAfter(data.url)
+        try {
+          const data: IData = JSON.parse(res.data)
+          resolve(data.url)
+        } catch (error) {
+          reject(error)
+        }
       },
       fail: function (res) {
         console.error(res)
@@ -53,13 +56,17 @@ export function uploadMakeup(): Promise<any> {
             accept: 'application/json',
           },
           success: function (res) {
-            const data: IData = JSON.parse(res.data)
-            const newItem = {
-              id: mid,
-              src: data.url,
-              text: '自定义',
+            try {
+              const data: IData = JSON.parse(res.data)
+              const newItem = {
+                id: mid,
+                src: data.url,
+                text: '自定义',
+              }
+              resolve(newItem)
+            } catch (error) {
+              reject(res)
             }
-            resolve(newItem)
           },
           fail: function (res) {
             console.error(res)

@@ -1,5 +1,5 @@
-import Taro from '@tarojs/taro'
-import React, { useState, useMemo } from 'react'
+import Taro, { memo } from '@tarojs/taro'
+import React, { useState, useMemo, useCallback } from 'react'
 import { View, Text, Button } from '@tarojs/components'
 import classnames from 'classnames'
 import { myList } from '../../constants/myList'
@@ -44,7 +44,7 @@ const Index: Taro.FC = () => {
   }
 
   // 选择妆面
-  const onChoose = async (id: string) => {
+  const onChoose = useCallback(async (id: string) => {
     setLoading(true)
     try {
       const url = await genPhoto(id, before)
@@ -61,7 +61,7 @@ const Index: Taro.FC = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [before])
 
   // 上传妆面
   const onUploadMakeup = async () => {
@@ -124,38 +124,15 @@ const Index: Taro.FC = () => {
           />
           <View className="text">上传妆面</View>
         </View>
-        {makeupList.map((item) => {
-          return (
-            <View
-              key={item.id}
-              className={classnames({
-                make_up: true,
-                choose: String(item.id) === String(chooseID),
-              })}
-              onClick={() => {
-                if (String(item.id) === String(chooseID)) {
-                  setChoose(UNCHOOSED)
-                  return
-                }
-
-                onChoose(item.id)
-              }}
-            >
-              <View
-                key={item.id}
-                className={classnames({
-                  null: true,
-                  make_up_item: !!item.src,
-                })}
-                style={{
-                  background: `url(${item.src}) center no-repeat`,
-                  backgroundSize: 'cover',
-                }}
-              />
-              <View className="text">{item.text}</View>
-            </View>
-          )
-        })}
+        {makeupList.map((item) => (
+          <MemoFace
+            key={item.id}
+            item={item}
+            chooseID={chooseID}
+            setChoose={setChoose}
+            onChoose={onChoose}
+          />
+        ))}
       </View>
       <View className="buttons">
         <Button className="upload" onClick={uploadImg} size="mini">
@@ -169,3 +146,45 @@ const Index: Taro.FC = () => {
   )
 }
 export default Index
+
+interface IFaceProps {
+  item: any
+  chooseID: string
+  setChoose: (arg: string) => any
+  onChoose: (arg: string) => any
+}
+
+const Face: Taro.FC<IFaceProps> = ({ item, chooseID, setChoose, onChoose }) => {
+  return (
+    <View
+      key={item.id}
+      className={classnames({
+        make_up: true,
+        choose: String(item.id) === String(chooseID),
+      })}
+      onClick={() => {
+        if (String(item.id) === String(chooseID)) {
+          setChoose(UNCHOOSED)
+          return
+        }
+
+        onChoose(item.id)
+      }}
+    >
+      <View
+        key={item.id}
+        className={classnames({
+          null: true,
+          make_up_item: !!item.src,
+        })}
+        style={{
+          background: `url(${item.src}) center no-repeat`,
+          backgroundSize: 'cover',
+        }}
+      />
+      <View className="text">{item.text}</View>
+    </View>
+  )
+}
+
+const MemoFace = memo(Face)
