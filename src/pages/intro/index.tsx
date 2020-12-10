@@ -18,11 +18,11 @@ const Intro: Taro.FC = () => {
   }
 
   useEffect(() => {
-    timer = setTimeout(toNextPage, 3000)
+    // timer = setTimeout(toNextPage, 3000)
   }, [])
   return (
     <View className="intro">
-      <View className="hello">图图美妆 真香</View>
+      <View className="hello">图图美妆 &nbsp; 真香</View>
       <View className="loading">
         <Loading />
       </View>
@@ -57,6 +57,7 @@ const Intro: Taro.FC = () => {
           backgroundSize: 'cover',
         }}
       />
+      <Text className="copyright">©2020 Continue. All rights reserved.</Text>
     </View>
   )
 }

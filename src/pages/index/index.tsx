@@ -1,10 +1,9 @@
 import Taro from '@tarojs/taro'
-import React, { useState, useEffect, useMemo } from 'react'
-import { View, Text, Image, Button } from '@tarojs/components'
-import { baseUrl } from '../../config'
+import React, { useState, useMemo } from 'react'
+import { View, Text, Button } from '@tarojs/components'
 import classnames from 'classnames'
 import { myList } from '../../constants/myList'
-import { Loading } from '../../components/Loading'
+// import { Loading } from '../../components/Loading'
 import example from '../../res/images/example.jpeg'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
@@ -12,7 +11,6 @@ import { genPhoto, uploadMakeup } from './api'
 const custom = 'https://i.ibb.co/5sJSmPK/3.png'
 
 function getMakeupList() {
-  console.log('render getMakeupList >>>>>>>>>')
   return Taro.getStorageSync('makeuplist') || myList
 }
 
@@ -20,11 +18,10 @@ const UNCHOOSED = '9999'
 
 const Index: Taro.FC = () => {
   console.log('render Index >>>>>>>>>')
+  const [isLoading, setLoading] = useState(false) //妆面id
 
   const [chooseID, setChoose] = useState(UNCHOOSED) //妆面id
 
-  //分享给好友
-  // const storageList = Taro.getStorageSync('makeuplist')
   const [makeupList, setList] = useState(getMakeupList) //妆面列表
   const [before, setBefore] = useState(example) //妆前照片
   const [after, setAfter] = useState('') //妆后照片
@@ -48,19 +45,40 @@ const Index: Taro.FC = () => {
 
   // 选择妆面
   const onChoose = async (id: string) => {
-    const url = await genPhoto(id, before)
-    setAfter(url)
-    setChoose(id)
+    setLoading(true)
+    try {
+      const url = await genPhoto(id, before)
+      setAfter(url)
+      setChoose(id)
+    } catch (error) {
+      console.log(error)
+      Taro.showToast({
+        title: '生成失败...',
+        // icon: 'success',
+        duration: 2000,
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   // 上传妆面
   const onUploadMakeup = async () => {
-    const newItem = await uploadMakeup()
-    // 预先请求
-    genPhoto(newItem.mid, before)
-    const list = [newItem, ...makeupList]
-    setList(list)
-    Taro.setStorageSync('makeuplist', list)
+    try {
+      const newItem = await uploadMakeup()
+      // 预先请求
+      genPhoto(newItem.mid, before)
+      const list = [newItem, ...makeupList]
+      setList(list)
+      Taro.setStorageSync('makeuplist', list)
+    } catch (error) {
+      console.log(error)
+      Taro.showToast({
+        title: '生成失败...',
+        // icon: 'success',
+        duration: 2000,
+      })
+    }
   }
 
   const previewImage = () => {
@@ -72,6 +90,7 @@ const Index: Taro.FC = () => {
 
   return (
     <View className="index">
+      {isLoading && <View className="loading-text">AI 生成中...</View>}
       <View className="logo" />
       <View className="display">
         <View
@@ -86,6 +105,7 @@ const Index: Taro.FC = () => {
           onClick={previewImage}
         />
       </View>
+
       <View className="foot">
         <View className="custom" onClick={onUploadMakeup}>
           <View
@@ -138,7 +158,6 @@ const Index: Taro.FC = () => {
           分享给朋友
         </Button>
       </View>
-      <Text className="copyright">©2020 Continue. All rights reserved.</Text>
     </View>
   )
 }
