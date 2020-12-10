@@ -31,4 +31,5 @@ export const myList = [
   },
 ] //预设妆面
 
-export const example_net = 'https://i.ibb.co/6RLh4x6/example.jpg'
+export const example_net =
+  'https://barista.llscdn.com/alix/images/1607601862014688186.jpeg?v=20130910'
