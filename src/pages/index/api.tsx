@@ -1,4 +1,7 @@
+import { example_net } from '../../constants/myList'
 import { baseUrl } from '../../config'
+
+import example from '../../res/images/example.jpeg'
 
 interface IData {
   url: string
@@ -7,10 +10,12 @@ interface IData {
 
 // 生成妆图
 export function genPhoto(id: string, before: string): Promise<string> {
+  const before1 = before === example_net ? example : before
+
   return new Promise((resolve, reject) => {
     wx.uploadFile({
       url: baseUrl + '/gen_photo',
-      filePath: before,
+      filePath: before1,
       name: 'photo',
       formData: {
         target_id: id || '0',

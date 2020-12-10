@@ -2,12 +2,13 @@ import Taro, { memo } from '@tarojs/taro'
 import React, { useState, useMemo, useCallback } from 'react'
 import { View, Text, Button } from '@tarojs/components'
 import classnames from 'classnames'
-import { myList } from '../../constants/myList'
+import { example_net, myList } from '../../constants/myList'
 // import { Loading } from '../../components/Loading'
-import example from '../../res/images/example.jpeg'
+// import example from '../../res/images/example.jpeg'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 import { genPhoto, uploadMakeup } from './api'
+import MemoFace from './face'
 const custom = 'https://i.ibb.co/5sJSmPK/3.png'
 
 function getMakeupList() {
@@ -23,7 +24,7 @@ const Index: Taro.FC = () => {
   const [chooseID, setChoose] = useState(UNCHOOSED) //妆面id
 
   const [makeupList, setList] = useState(getMakeupList) //妆面列表
-  const [before, setBefore] = useState(example) //妆前照片
+  const [before, setBefore] = useState(example_net) //妆前照片
   const [after, setAfter] = useState('') //妆后照片
 
   const isChoosed = useMemo(() => chooseID !== UNCHOOSED, [chooseID])
@@ -44,24 +45,27 @@ const Index: Taro.FC = () => {
   }
 
   // 选择妆面
-  const onChoose = useCallback(async (id: string) => {
-    setLoading(true)
-    try {
-      const url = await genPhoto(id, before)
-      setAfter(url)
-      setChoose(id)
-    } catch (error) {
-      console.log(error)
-      Taro.showToast({
-        title: '生成失败...',
-        icon: 'none',
-        mask: false,
-        duration: 2000,
-      })
-    } finally {
-      setLoading(false)
-    }
-  }, [before])
+  const onChoose = useCallback(
+    async (id: string) => {
+      setLoading(true)
+      try {
+        const url = await genPhoto(id, before)
+        setAfter(url)
+        setChoose(id)
+      } catch (error) {
+        console.log(error)
+        Taro.showToast({
+          title: '生成失败...',
+          icon: 'none',
+          mask: false,
+          duration: 2000,
+        })
+      } finally {
+        setLoading(false)
+      }
+    },
+    [before]
+  )
 
   // 上传妆面
   const onUploadMakeup = async () => {
@@ -84,14 +88,9 @@ const Index: Taro.FC = () => {
   }
 
   const previewImage = () => {
-    let before1 = before
-    if (before1 === '/res/images/example.jpeg') {
-      before1 = 'https://i.ibb.co/6RLh4x6/example.jpg'
-    }
-
     Taro.previewImage({
-      current: isChoosed ? after : before1, // 当前显示图片的http链接
-      urls: [isChoosed ? after : before1], // 需要预览的图片http链接列表
+      current: isChoosed ? after : before, // 当前显示图片的http链接
+      urls: [isChoosed ? after : before], // 需要预览的图片http链接列表
     })
   }
 
@@ -146,45 +145,3 @@ const Index: Taro.FC = () => {
   )
 }
 export default Index
-
-interface IFaceProps {
-  item: any
-  chooseID: string
-  setChoose: (arg: string) => any
-  onChoose: (arg: string) => any
-}
-
-const Face: Taro.FC<IFaceProps> = ({ item, chooseID, setChoose, onChoose }) => {
-  return (
-    <View
-      key={item.id}
-      className={classnames({
-        make_up: true,
-        choose: String(item.id) === String(chooseID),
-      })}
-      onClick={() => {
-        if (String(item.id) === String(chooseID)) {
-          setChoose(UNCHOOSED)
-          return
-        }
-
-        onChoose(item.id)
-      }}
-    >
-      <View
-        key={item.id}
-        className={classnames({
-          null: true,
-          make_up_item: !!item.src,
-        })}
-        style={{
-          background: `url(${item.src}) center no-repeat`,
-          backgroundSize: 'cover',
-        }}
-      />
-      <View className="text">{item.text}</View>
-    </View>
-  )
-}
-
-const MemoFace = memo(Face)
