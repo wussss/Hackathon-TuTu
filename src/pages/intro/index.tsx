@@ -19,7 +19,6 @@ const Intro: Taro.FC = () => {
   useEffect(() => {
     timer = setTimeout(toNextPage, 3000)
   }, [])
-
   return (
     <View className="intro">
       <View className="hello">这里是图图美妆的宣传语</View>

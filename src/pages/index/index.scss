@@ -28,8 +28,16 @@ $logo: '../../res/images/logo.png';
     background: #1e1e1f;
     @include flex-column;
     overflow: hidden;
-    Image {
+    .image {
       flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+      transition: background-image 2s;
+      transition-timing-function: ease-in-out;
+      &.after {
+        transition: background-image 2s;
+        transition-timing-function: ease-in-out;
+      }
     }
   }
   .foot {

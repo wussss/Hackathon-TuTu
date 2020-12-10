@@ -6,4 +6,8 @@ export default {
     navigationBarTitleText: '图图',
     navigationBarTextStyle: 'white',
   },
+  networkTimeout: {
+    request: 10000,
+    downloadFile: 10000,
+  },
 }

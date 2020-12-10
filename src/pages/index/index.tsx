@@ -5,10 +5,10 @@ import { baseUrl } from '../../config'
 import classnames from 'classnames'
 import { myList } from '../../constants/myList'
 import { Loading } from '../../components/Loading'
+import example from '../../res/images/example.jpeg'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 const custom = 'https://i.ibb.co/5sJSmPK/3.png'
-const example = 'https://i.ibb.co/4t741xf/test.jpg'
 
 interface IData {
   url: string
@@ -22,8 +22,7 @@ const Index: Taro.FC = () => {
   useEffect(() => {
     genPhoto(0)
   }, [before])
-
-
+  //分享给好友
   var storageList = Taro.getStorageSync('makeuplist')
   var [makeupList, setList] = useState(storageList ? storageList : myList) //妆面列表
   var [before, setBefore] = useState(example) //妆前照片
@@ -31,7 +30,6 @@ const Index: Taro.FC = () => {
 
   const uploadMakeup = () => {
     let customMakeUp = ''
-    let list = makeupList
     const mid: number = Date.now()
     wx.chooseImage({
       count: 1,
@@ -51,11 +49,12 @@ const Index: Taro.FC = () => {
           },
           success: function (res) {
             const data: IData = JSON.parse(res.data)
-            list.unshift({
+            const newItem = {
               id: mid,
               src: data.url,
               text: '自定义',
-            })
+            }
+            const list = [newItem, ...makeupList]
             setList(list)
             Taro.setStorageSync('makeuplist', list)
           },
@@ -106,13 +105,16 @@ const Index: Taro.FC = () => {
     <View className="index">
       <View className="logo" />
       <View className="display">
-        <Image
-          src={after ? after : before}
-          onClick={previewImage}
+        <View
+          className={classnames({
+            image:true,
+            after:after
+          })}
           style={{
-            width: '100%',
+            background: `url(${after ? after : before}) center no-repeat`,
+            backgroundSize: 'cover',
           }}
-          mode="widthFix"
+          onClick={previewImage}
         />
       </View>
       <View className="foot">
