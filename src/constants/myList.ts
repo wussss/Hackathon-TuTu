@@ -30,3 +30,5 @@ export const myList = [
     text: '艺术',
   },
 ] //预设妆面
+
+export const example_net = 'https://i.ibb.co/6RLh4x6/example.jpg'

@@ -1,4 +1,7 @@
+import { example_net } from '../../constants/myList'
 import { baseUrl } from '../../config'
+
+import example from '../../res/images/example.jpeg'
 
 interface IData {
   url: string
@@ -7,10 +10,12 @@ interface IData {
 
 // 生成妆图
 export function genPhoto(id: string, before: string): Promise<string> {
+  const before1 = before === example_net ? example : before
+
   return new Promise((resolve, reject) => {
     wx.uploadFile({
       url: baseUrl + '/gen_photo',
-      filePath: before,
+      filePath: before1,
       name: 'photo',
       formData: {
         target_id: id || '0',
@@ -20,9 +25,12 @@ export function genPhoto(id: string, before: string): Promise<string> {
         accept: 'application/json',
       },
       success: function (res) {
-        const data: IData = JSON.parse(res.data)
-        resolve(data.url)
-        // setAfter(data.url)
+        try {
+          const data: IData = JSON.parse(res.data)
+          resolve(data.url)
+        } catch (error) {
+          reject(error)
+        }
       },
       fail: function (res) {
         console.error(res)
@@ -53,13 +61,17 @@ export function uploadMakeup(): Promise<any> {
             accept: 'application/json',
           },
           success: function (res) {
-            const data: IData = JSON.parse(res.data)
-            const newItem = {
-              id: mid,
-              src: data.url,
-              text: '自定义',
+            try {
+              const data: IData = JSON.parse(res.data)
+              const newItem = {
+                id: mid,
+                src: data.url,
+                text: '自定义',
+              }
+              resolve(newItem)
+            } catch (error) {
+              reject(res)
             }
-            resolve(newItem)
           },
           fail: function (res) {
             console.error(res)
