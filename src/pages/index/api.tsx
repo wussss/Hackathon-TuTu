@@ -1,7 +1,8 @@
-import { example_net } from '../../constants/myList'
+// import { example_net } from '../../constants/myList'
 import { baseUrl } from '../../config'
 
-import example from '../../res/images/example.jpeg'
+// import example from '../../res/images/example.jpeg'
+import { IBefore } from '.'
 
 interface IData {
   url: string
@@ -9,8 +10,8 @@ interface IData {
 }
 
 // 生成妆图
-export function genPhoto(id: string, before: string): Promise<string> {
-  const before1 = before === example_net ? example : before
+export function genPhoto(id: string, before: IBefore): Promise<string> {
+  const before1 = before.local_src ? before.local_src : before.src
 
   return new Promise((resolve, reject) => {
     wx.uploadFile({
@@ -67,6 +68,7 @@ export function uploadMakeup(): Promise<any> {
                 id: mid,
                 src: data.url,
                 text: '自定义',
+                local_src: customMakeUp,
               }
               resolve(newItem)
             } catch (error) {
