@@ -27,4 +27,8 @@ declare const process: {
 }
 declare interface window {
   [method: string]: () => void
-} 
+}
+
+declare var wx: {
+  [method: string]: (...any) => any
+}

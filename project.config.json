@@ -2,9 +2,9 @@
   "miniprogramRoot": "dist/",
   "projectname": "Hackathon-TuTu",
   "description": "Hackathon项目-实现图片动漫效果",
-  "appid": "wx5acd651d4b258518",
+  "appid": "wx9d3f6e4de32933ae",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "postcss": false,

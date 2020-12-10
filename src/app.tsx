@@ -14,6 +14,7 @@ class App extends Component {
   componentDidHide() {}
 
   componentDidCatchError() {}
+
   static onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮

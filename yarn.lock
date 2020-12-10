@@ -6432,7 +6432,7 @@ miniprogram-api-typings@^2.11.0:
 
 miniprogram-api-typings@^3.2.0:
   version "3.2.0"
-  resolved "https://npm-registry.llsengineer.com/miniprogram-api-typings/-/miniprogram-api-typings-3.2.0.tgz#5ba1225393167e242039e4131c343b5a688aea80"
+  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-3.2.0.tgz#5ba1225393167e242039e4131c343b5a688aea80"
   integrity sha1-W6EiU5MWfiQgOeQTHDQ7WmiK6oA=
 
 miniprogram-compiler@^0.1.2:

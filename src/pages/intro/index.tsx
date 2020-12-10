@@ -7,7 +7,7 @@ import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 import example from '../../res/images/example.jpeg'
 
-let timer: number = 0
+let timer: NodeJS.Timeout
 const footImg = 'https://i.ibb.co/3RkCbFq/foot.png'
 const Intro: Taro.FC = () => {
   const toNextPage = () => {
