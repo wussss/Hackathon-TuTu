@@ -3,7 +3,7 @@ export default {
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#F5B7B1',
-    navigationBarTitleText: '图图',
+    navigationBarTitleText: '图图美妆',
     navigationBarTextStyle: 'white',
   },
   networkTimeout: {

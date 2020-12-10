@@ -21,7 +21,7 @@ const Intro: Taro.FC = () => {
   }, [])
   return (
     <View className="intro">
-      <View className="hello">这里是图图美妆的宣传语</View>
+      <View className="hello">图图美妆   真香</View>
       <View className="loading">
         <Loading />
       </View>
