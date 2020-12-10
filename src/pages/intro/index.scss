@@ -15,7 +15,7 @@
   }
   .loading {
     position: fixed;
-    top: 50%;
+    top: 45%;
   }
   .iconfont {
     color: $primary-color;
@@ -35,5 +35,15 @@
     /* prettier-ignore */
     height:80PX;
     margin-bottom: 0;
+  }
+  .copyright {
+    // height: 0;
+    color: $text-color;
+    opacity: 0.5;
+    /* prettier-ignore */
+    font-size: 10PX;
+    position: fixed;
+    /* prettier-ignore */
+    bottom:1PX;
   }
 }

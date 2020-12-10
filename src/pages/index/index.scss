@@ -8,6 +8,17 @@ $gray: '../../res/images/gray.png';
   color: $text-color;
   @include flex-column;
   justify-content: space-between;
+
+  .loading-text{
+    position: fixed;
+    /* prettier-ignore */
+    right: 10PX;
+     /* prettier-ignore */
+    top: 5PX;
+    color: #ef0505;
+    font-weight: 500;
+  }
+
   .logo {
     background: url($logo) center no-repeat;
     background-size: cover;
@@ -26,7 +37,7 @@ $gray: '../../res/images/gray.png';
   }
   .display {
     width: 100%;
-    height: 75%;
+    height: 80%;
     background: #1e1e1f;
     @include flex-column;
     overflow: hidden;
@@ -34,10 +45,10 @@ $gray: '../../res/images/gray.png';
       flex-shrink: 0;
       width: 100%;
       height: 100%;
-      transition: background-image 1s;
+      transition: background-image 0.2s;
       transition-timing-function: ease-in;
       &.after {
-        transition: background-image 1s;
+        transition: background-image 0.2s;
         transition-timing-function: ease-in;
       }
     }
@@ -49,7 +60,7 @@ $gray: '../../res/images/gray.png';
     @include flex-row;
     overflow-x: scroll;
     /* prettier-ignore */
-    margin-top:10PX;
+    margin-top:4PX;
     .make_up,
     .custom {
       @include flex-column;
@@ -75,10 +86,10 @@ $gray: '../../res/images/gray.png';
         width: 100%;
         /* prettier-ignore */
         height:60PX;
-        transition: background-image 1s;
+        transition: background-image 0.3s;
         transition-timing-function: ease-in;
         &.make_up_item {
-          transition: background-image 1s;
+          transition: background-image 0.3s;
           transition-timing-function: ease-in;
         }
       }
@@ -98,17 +109,17 @@ $gray: '../../res/images/gray.png';
     @include flex-row;
     justify-content: space-around;
     /* prettier-ignore */
-    margin-bottom:10PX;
+    margin-bottom:2PX;
     width: 100%;
-    height: 10%;
+    height: 8%;
     .upload {
       /* prettier-ignore */
-      height: 30PX;
+      height: 36PX;
       /* prettier-ignore */
       width:150PX;
       text-align: center;
       /* prettier-ignore */
-      line-height: 30PX;
+      line-height: 36PX;
       /* prettier-ignore */
       border-radius: 5PX;
       background: $primary-color;
@@ -117,25 +128,17 @@ $gray: '../../res/images/gray.png';
     }
     .share {
       /* prettier-ignore */
-      height: 30PX;
+      height: 36PX;
       /* prettier-ignore */
       width:150PX;
       text-align: center;
       /* prettier-ignore */
-      line-height: 30PX;
+      line-height: 36PX;
       /* prettier-ignore */
       border-radius: 5PX;
       background: $primary-color;
       color: white;
     }
   }
-  .copyright {
-    color: $text-color;
-    opacity: 0.5;
-    /* prettier-ignore */
-    font-size: 10PX;
-    position: fixed;
-    /* prettier-ignore */
-    bottom:1PX;
-  }
+
 }
