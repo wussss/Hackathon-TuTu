@@ -93,6 +93,7 @@ const Index: Taro.FC = () => {
       success: async (res) => {
         setBefore(res.tempFilePaths[0])
         setAfter('')
+        setChoose(1000)
       },
     })
   }

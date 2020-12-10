@@ -15,6 +15,11 @@ export const myList = [
     text: '日系',
   },
   {
+    id: 5,
+    src: 'https://i.ibb.co/Tk7XryW/5.png',
+    text: '高级',
+  },
+  {
     id: 6,
     src: 'https://i.ibb.co/SrYh6kY/6.png',
     text: '裸妆',
