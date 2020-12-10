@@ -1,0 +1,192 @@
+@import '../../base.scss';
+
+.loading-anim {
+  position: relative;
+  /* prettier-ignore */
+  width: 60PX;
+  /* prettier-ignore */
+  height:60PX;
+  .border {
+    position: absolute;
+    border-radius: 50%;
+    /* prettier-ignore */
+    border: 3PX solid $primary-color;
+    &.out {
+      top: 15%;
+      left: 15%;
+      width: 70%;
+      height: 70%;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: spin 2s linear reverse infinite;
+    }
+    &.in {
+      top: 18%;
+      left: 18%;
+      width: 64%;
+      height: 64%;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      animation: spin 1.5s linear infinite;
+    }
+    &.mid {
+      top: 40%;
+      left: 40%;
+      width: 20%;
+      height: 20%;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+  }
+  .circle {
+    width: 100%;
+    height: 100%;
+    animation: spin 5s linear infinite;
+    .dot {
+      position: absolute;
+      display: block;
+      /* prettier-ignore */
+      width: 10PX;
+      /* prettier-ignore */
+      height: 10PX;
+      border-radius: 50%;
+      background-color: $primary-color;
+      animation: jitter 5s ease-in-out infinite, fade-in-out 5s linear infinite;
+    }
+    .dot:nth-child(1) {
+      /* prettier-ignore */
+      top: 22.5PX;
+      /* prettier-ignore */
+      left: 45PX;
+      animation-delay: 0s;
+    }
+
+    .dot:nth-child(2) {
+      /* prettier-ignore */
+      top: 33.75PX;
+      /* prettier-ignore */
+      left: 42PX;
+      animation-delay: 0.41667s;
+    }
+
+    .dot:nth-child(3) {
+      /* prettier-ignore */
+      top: 42PX;
+      /* prettier-ignore */
+      left: 33.75PX;
+      animation-delay: 0.83333s;
+    }
+
+    .dot:nth-child(4) {
+      /* prettier-ignore */
+      top: 45PX;
+      /* prettier-ignore */
+      left: 22.5PX;
+      animation-delay: 1.25s;
+    }
+
+    .dot:nth-child(5) {
+      /* prettier-ignore */
+      top: 42PX;
+      /* prettier-ignore */
+      left: 11.25PX;
+      animation-delay: 1.66667s;
+    }
+
+    .dot:nth-child(6) {
+      /* prettier-ignore */
+      top: 33.75PX;
+      /* prettier-ignore */
+      left: 3PX;
+      animation-delay: 2.08333s;
+    }
+
+    .dot:nth-child(7) {
+      /* prettier-ignore */
+      top: 22.5PX;
+      /* prettier-ignore */
+      left: 0PX;
+      animation-delay: 2.5s;
+    }
+
+    .dot:nth-child(8) {
+      /* prettier-ignore */
+      top: 11.25PX;
+      /* prettier-ignore */
+      left: 3PX;
+      animation-delay: 2.91667s;
+    }
+
+    .dot:nth-child(9) {
+      /* prettier-ignore */
+      top: 3PX;
+      /* prettier-ignore */
+      left: 11.25PX;
+      animation-delay: 3.33333s;
+    }
+
+    .dot:nth-child(10) {
+      /* prettier-ignore */
+      top: 0PX;
+      /* prettier-ignore */
+      left: 22.5PX;
+      animation-delay: 3.75s;
+    }
+
+    .dot:nth-child(11) {
+      /* prettier-ignore */
+      top: 3PX;
+      /* prettier-ignore */
+      left: 33.75PX;
+      animation-delay: 4.16667s;
+    }
+
+    .dot:nth-child(12) {
+      /* prettier-ignore */
+      top: 11.25PX;
+      /* prettier-ignore */
+      left: 42PX;
+      animation-delay: 4.58333s;
+    }
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes jitter {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.7, 0.7);
+  }
+  50% {
+    transform: scale(1, 1);
+  }
+  75% {
+    transform: scale(1.3, 1.3);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+@keyframes fade-in-out {
+  0% {
+    opacity: 0.8;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
