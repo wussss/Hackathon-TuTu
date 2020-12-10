@@ -92,6 +92,7 @@ const Index: Taro.FC = () => {
       sourceType: ['album', 'camera'],
       success: async (res) => {
         setBefore(res.tempFilePaths[0])
+        setAfter('')
       },
     })
   }
@@ -107,8 +108,8 @@ const Index: Taro.FC = () => {
       <View className="display">
         <View
           className={classnames({
-            image:true,
-            after:after
+            image: true,
+            after: after,
           })}
           style={{
             background: `url(${after ? after : before}) center no-repeat`,
@@ -120,7 +121,7 @@ const Index: Taro.FC = () => {
       <View className="foot">
         <View className="custom" onClick={uploadMakeup}>
           <View
-            className="make_up_item"
+            className="custom_item"
             style={{
               background: `url(${custom}) center no-repeat`,
               backgroundSize: 'cover',
@@ -143,7 +144,10 @@ const Index: Taro.FC = () => {
             >
               <View
                 key={item.id}
-                className="make_up_item"
+                className={classnames({
+                  null: true,
+                  make_up_item: !!item.src,
+                })}
                 style={{
                   background: `url(${item.src}) center no-repeat`,
                   backgroundSize: 'cover',
