@@ -54,7 +54,8 @@ const Index: Taro.FC = () => {
       console.log(error)
       Taro.showToast({
         title: '生成失败...',
-        // icon: 'success',
+        icon: 'none',
+        mask: false,
         duration: 2000,
       })
     } finally {
@@ -74,17 +75,23 @@ const Index: Taro.FC = () => {
     } catch (error) {
       console.log(error)
       Taro.showToast({
-        title: '生成失败...',
-        // icon: 'success',
+        title: '上传失败...',
+        icon: 'none',
+        mask: false,
         duration: 2000,
       })
     }
   }
 
   const previewImage = () => {
-    wx.previewImage({
-      current: isChoosed ? after : before, // 当前显示图片的http链接
-      urls: [isChoosed ? after : before], // 需要预览的图片http链接列表
+    let before1 = before
+    if (before1 === '/res/images/example.jpeg') {
+      before1 = 'https://i.ibb.co/6RLh4x6/example.jpg'
+    }
+
+    Taro.previewImage({
+      current: isChoosed ? after : before1, // 当前显示图片的http链接
+      urls: [isChoosed ? after : before1], // 需要预览的图片http链接列表
     })
   }
 

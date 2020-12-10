@@ -18,7 +18,7 @@ const Intro: Taro.FC = () => {
   }
 
   useEffect(() => {
-    // timer = setTimeout(toNextPage, 3000)
+    timer = setTimeout(toNextPage, 3000)
   }, [])
   return (
     <View className="intro">
