@@ -25,6 +25,7 @@ export function genPhoto(id: string, before: string): Promise<string> {
         accept: 'application/json',
       },
       success: function (res) {
+        console.log('genPhoto', res)
         try {
           const data: IData = JSON.parse(res.data)
           resolve(data.url)
@@ -33,7 +34,7 @@ export function genPhoto(id: string, before: string): Promise<string> {
         }
       },
       fail: function (res) {
-        console.error(res)
+        console.error('genPhoto', res)
         reject(res)
       },
     })
@@ -61,6 +62,7 @@ export function uploadMakeup(): Promise<any> {
             accept: 'application/json',
           },
           success: function (res) {
+            console.log('uploadMakeup', res)
             try {
               const data: IData = JSON.parse(res.data)
               const newItem = {
@@ -74,7 +76,7 @@ export function uploadMakeup(): Promise<any> {
             }
           },
           fail: function (res) {
-            console.error(res)
+            console.error('uploadMakeup', res)
             reject(res)
           },
         })
