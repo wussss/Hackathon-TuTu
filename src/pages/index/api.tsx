@@ -12,6 +12,7 @@ interface IData {
 // 生成妆图
 export function genPhoto(id: string, before: IBefore): Promise<string> {
   const before1 = before.local_src ? before.local_src : before.src
+  console.log('genPhoto fetching', before1)
 
   return new Promise((resolve, reject) => {
     wx.uploadFile({
@@ -31,6 +32,7 @@ export function genPhoto(id: string, before: IBefore): Promise<string> {
           const data: IData = JSON.parse(res.data)
           resolve(data.url)
         } catch (error) {
+          console.log('uploadMakeup', error)
           reject(error)
         }
       },
@@ -44,6 +46,7 @@ export function genPhoto(id: string, before: IBefore): Promise<string> {
 
 // 上传妆面
 export function uploadMakeup(): Promise<any> {
+  console.log('uploadMakeup fetching')
   const mid: string = Date.now() + '000' + ~~(Math.random() * 10000)
   return new Promise((resolve, reject) => {
     wx.chooseImage({
@@ -74,6 +77,7 @@ export function uploadMakeup(): Promise<any> {
               }
               resolve(newItem)
             } catch (error) {
+              console.error('uploadMakeup', error)
               reject(res)
             }
           },
@@ -84,7 +88,7 @@ export function uploadMakeup(): Promise<any> {
         })
       },
       fail: function (res) {
-        console.error(res)
+        console.error('uploadMakeup', res)
         reject(res)
       },
     })

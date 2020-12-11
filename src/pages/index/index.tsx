@@ -22,6 +22,11 @@ export interface IBefore {
 
 const UNCHOOSED = '9999'
 
+const useForceUpdate = () => {
+  const [, _forceUpdate] = useState(0)
+  return useCallback(() => _forceUpdate((n) => n + 1), [])
+}
+
 const Index: Taro.FC = () => {
   console.log('render Index >>>>>>>>>')
   const [isLoading, setLoading] = useState(false) //妆面id
@@ -37,9 +42,13 @@ const Index: Taro.FC = () => {
 
   const isChoosed = useMemo(() => chooseID !== UNCHOOSED, [chooseID])
 
+  const forceUpdate = useForceUpdate()
+
   // 上传本地照片
   const uploadImg = async () => {
     const info = Taro.getSystemInfoSync()
+    console.log('getSystemInfoSync', info.platform, info)
+
     if (info.platform === 'android') {
       wx.chooseImage({
         count: 1,
@@ -49,6 +58,7 @@ const Index: Taro.FC = () => {
           setBefore({ src, local_src: src })
           setChoose(UNCHOOSED)
           setAfter('')
+          forceUpdate()
           // 预先请求
           genPhoto('0', { src, local_src: src })
         },
@@ -61,6 +71,7 @@ const Index: Taro.FC = () => {
       setBefore({ src, local_src })
       setChoose(UNCHOOSED)
       setAfter('')
+      forceUpdate()
       // 预先请求
       genPhoto('0', { src, local_src })
     } catch (error) {}
@@ -74,6 +85,7 @@ const Index: Taro.FC = () => {
         const url = await genPhoto(id, before)
         setAfter(url)
         setChoose(id)
+        forceUpdate()
       } catch (error) {
         console.log(error)
         Taro.showToast({
@@ -97,6 +109,7 @@ const Index: Taro.FC = () => {
       genPhoto(newItem.mid, before)
       const list = [newItem, ...makeupList]
       setList(list)
+      forceUpdate()
       Taro.setStorageSync('makeuplist', list)
     } catch (error) {
       console.log(error)
