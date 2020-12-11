@@ -7,7 +7,7 @@ export default {
     navigationBarTextStyle: 'white',
   },
   networkTimeout: {
-    request: 10000,
-    downloadFile: 10000,
+    request: 30000,
+    downloadFile: 30000,
   },
 }
