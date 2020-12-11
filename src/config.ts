@@ -1,1 +1,1 @@
-export const baseUrl: string = 'http://10.180.9.102:5000' // 后端服务的请求地址
+export const baseUrl: string = 'https://hackthon-tutu.thellsapi.com/' // 后端服务的请求地址
