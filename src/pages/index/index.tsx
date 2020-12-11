@@ -29,6 +29,17 @@ const useForceUpdate = () => {
 
 const Index: Taro.FC = () => {
   console.log('render Index >>>>>>>>>')
+  Taro.useShareAppMessage(() => {
+    return {
+      title: '图图美妆 真香',
+    }
+  })
+  Taro.useShareTimeline(() => {
+    return {
+      title: '图图美妆 真香',
+    }
+  })
+
   const [isLoading, setLoading] = useState(false) //妆面id
 
   const [chooseID, setChoose] = useState(UNCHOOSED) //妆面id
