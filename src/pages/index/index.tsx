@@ -1,10 +1,10 @@
-import Taro, { memo } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import React, { useState, useMemo, useCallback } from 'react'
-import { View, Text, Button } from '@tarojs/components'
+import { View, Button } from '@tarojs/components'
 import classnames from 'classnames'
 import { example_net, myList } from '../../constants/myList'
 // import { Loading } from '../../components/Loading'
-// import example from '../../res/images/example.jpeg'
+import example from '../../res/images/example.jpeg'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 import { genPhoto, uploadMakeup } from './api'
@@ -13,6 +13,11 @@ const custom = 'https://i.ibb.co/5sJSmPK/3.png'
 
 function getMakeupList() {
   return Taro.getStorageSync('makeuplist') || myList
+}
+
+export interface IBefore {
+  src: string
+  local_src: string
 }
 
 const UNCHOOSED = '9999'
@@ -24,24 +29,41 @@ const Index: Taro.FC = () => {
   const [chooseID, setChoose] = useState(UNCHOOSED) //妆面id
 
   const [makeupList, setList] = useState(getMakeupList) //妆面列表
-  const [before, setBefore] = useState(example_net) //妆前照片
+  const [before, setBefore] = useState<IBefore>({
+    src: example_net,
+    local_src: example,
+  }) //妆前照片
   const [after, setAfter] = useState('') //妆后照片
 
   const isChoosed = useMemo(() => chooseID !== UNCHOOSED, [chooseID])
 
   // 上传本地照片
-  const uploadImg = () => {
-    wx.chooseImage({
-      count: 1,
-      sourceType: ['album', 'camera'],
-      success: async (res) => {
-        setBefore(res.tempFilePaths[0])
-        setChoose(UNCHOOSED)
-        setAfter('')
-        // 预先请求
-        genPhoto('0', before)
-      },
-    })
+  const uploadImg = async () => {
+    const info = Taro.getSystemInfoSync()
+    if (info.platform === 'android') {
+      wx.chooseImage({
+        count: 1,
+        sourceType: ['album', 'camera'],
+        success: async (res) => {
+          const src = res.tempFilePaths[0]
+          setBefore({ src, local_src: src })
+          setChoose(UNCHOOSED)
+          setAfter('')
+          // 预先请求
+          genPhoto('0', { src, local_src: src })
+        },
+      })
+      return
+    }
+
+    try {
+      const { src, local_src } = await uploadMakeup()
+      setBefore({ src, local_src })
+      setChoose(UNCHOOSED)
+      setAfter('')
+      // 预先请求
+      genPhoto('0', { src, local_src })
+    } catch (error) {}
   }
 
   // 选择妆面
@@ -89,8 +111,8 @@ const Index: Taro.FC = () => {
 
   const previewImage = () => {
     Taro.previewImage({
-      current: isChoosed ? after : before, // 当前显示图片的http链接
-      urls: [isChoosed ? after : before], // 需要预览的图片http链接列表
+      current: isChoosed ? after : before.src, // 当前显示图片的http链接
+      urls: [isChoosed ? after : before.src], // 需要预览的图片http链接列表
     })
   }
 
@@ -105,7 +127,9 @@ const Index: Taro.FC = () => {
             after: after,
           })}
           style={{
-            background: `url(${isChoosed ? after : before}) center no-repeat`,
+            background: `url(${
+              isChoosed ? after : before.src
+            }) center no-repeat`,
             backgroundSize: 'cover',
           }}
           onClick={previewImage}
