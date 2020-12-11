@@ -41,7 +41,7 @@ const Index: Taro.FC = () => {
   const uploadImg = async () => {
     const info = Taro.getSystemInfoSync()
     if (info.platform === 'android') {
-      wx.chooseImage({
+      Taro.chooseImage({
         count: 1,
         sourceType: ['album', 'camera'],
         success: async (res) => {

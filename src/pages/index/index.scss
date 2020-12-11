@@ -37,7 +37,7 @@ $gray: '../../res/images/gray.png';
   }
   .display {
     width: 100%;
-    height: 80%;
+    height: 80vh;
     background: #1e1e1f;
     @include flex-column;
     overflow: hidden;

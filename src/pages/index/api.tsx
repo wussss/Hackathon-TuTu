@@ -14,7 +14,7 @@ export function genPhoto(id: string, before: IBefore): Promise<string> {
   const before1 = before.local_src ? before.local_src : before.src
 
   return new Promise((resolve, reject) => {
-    wx.uploadFile({
+    Taro.uploadFile({
       url: baseUrl + '/gen_photo',
       filePath: before1,
       name: 'photo',
@@ -45,12 +45,12 @@ export function genPhoto(id: string, before: IBefore): Promise<string> {
 export function uploadMakeup(): Promise<any> {
   const mid: string = Date.now() + '000' + ~~(Math.random() * 10000)
   return new Promise((resolve, reject) => {
-    wx.chooseImage({
+    Taro.chooseImage({
       count: 1,
       sourceType: ['album', 'camera'],
       success: (res) => {
         const customMakeUp = res.tempFilePaths[0]
-        wx.uploadFile({
+        Taro.uploadFile({
           url: baseUrl + '/up_photo',
           filePath: customMakeUp,
           name: 'photo',
