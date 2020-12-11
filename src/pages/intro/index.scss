@@ -6,16 +6,15 @@
   @include flex-column;
   .hello {
     /* prettier-ignore */
-    margin-top:10PX;
+    margin-top:20%;
     /* prettier-ignore */
     width: 15PX;
     /* prettier-ignore */
-    line-height: 30PX;
-    font-family: '';
+    line-height: 40PX;
   }
   .loading {
     position: fixed;
-    top: 45%;
+    top: 70%;
   }
   .iconfont {
     color: $primary-color;
@@ -26,7 +25,7 @@
     /* prettier-ignore */
     width: 50PX;
     /* prettier-ignore */
-    Text{
+    .next{
       margin-left:5PX;
     }
   }
@@ -34,7 +33,9 @@
     width: 100%;
     /* prettier-ignore */
     height:80PX;
-    margin-bottom: 0;
+    position: fixed;
+    /* prettier-ignore */
+    bottom:5%;
   }
   .copyright {
     // height: 0;

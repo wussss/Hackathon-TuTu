@@ -27,7 +27,7 @@ const Intro: Taro.FC = () => {
         <Loading />
       </View>
       <View className="iconfont icon-jinrufasong" onClick={toNextPage}>
-        <Text>跳过</Text>
+        <Text className="next">跳过</Text>
         {myList.map((item) => (
           <View
             key={item.id}
