@@ -9,11 +9,11 @@ $gray: '../../res/images/gray.png';
   @include flex-column;
   justify-content: space-between;
 
-  .loading-text{
+  .loading-text {
     position: fixed;
     /* prettier-ignore */
     right: 10PX;
-     /* prettier-ignore */
+    /* prettier-ignore */
     top: 5PX;
     color: #ef0505;
     font-weight: 500;
@@ -28,7 +28,7 @@ $gray: '../../res/images/gray.png';
     height:100PX;
     /* prettier-ignore */
     opacity: 0.8;
-    z-index: 5 !important;
+    z-index: 1200 !important;
     position: fixed;
     /* prettier-ignore */
     left:5PX;
@@ -37,7 +37,7 @@ $gray: '../../res/images/gray.png';
   }
   .display {
     width: 100%;
-    height: 80%;
+    height: 76vh;
     background: #1e1e1f;
     @include flex-column;
     overflow: hidden;
@@ -45,12 +45,6 @@ $gray: '../../res/images/gray.png';
       flex-shrink: 0;
       width: 100%;
       height: 100%;
-      transition: background-image 0.2s;
-      transition-timing-function: ease-in;
-      &.after {
-        transition: background-image 0.2s;
-        transition-timing-function: ease-in;
-      }
     }
   }
   .foot {
@@ -140,5 +134,4 @@ $gray: '../../res/images/gray.png';
       color: white;
     }
   }
-
 }

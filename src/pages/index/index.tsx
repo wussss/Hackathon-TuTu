@@ -1,10 +1,11 @@
 import Taro from '@tarojs/taro'
 import React, { useState, useMemo, useCallback } from 'react'
-import { View, Button } from '@tarojs/components'
+import { View, Button, Image } from '@tarojs/components'
 import classnames from 'classnames'
 import { example_net, myList } from '../../constants/myList'
 // import { Loading } from '../../components/Loading'
 import example from '../../res/images/example.jpeg'
+import progress from '../../res/images/progress.png'
 import '../../res/iconfont/iconfont.scss'
 import './index.scss'
 import { genPhoto, uploadMakeup } from './api'
@@ -139,27 +140,60 @@ const Index: Taro.FC = () => {
       urls: [isChoosed ? after : before.src], // 需要预览的图片http链接列表
     })
   }
-
+  const [pos, setPos] = useState(78) //滑动条位置
+  const touchMove = (e) => {
+    let { clientX } = e.touches[0]
+    const windowX = wx.getSystemInfoSync().windowWidth
+    if (e.touches.length === 1 && clientX+30 <= windowX) {
+      const newPos = ((clientX - 12) / windowX) * 100
+      setPos(newPos)
+      console.log(newPos)
+    } else {
+      return
+    }
+  }
   return (
     <View className="index">
       {isLoading && <View className="loading-text">AI 生成中...</View>}
       <View className="logo" />
       <View className="display">
         <View
-          className={classnames({
-            image: true,
-            after: after,
-          })}
+          className="progress"
           style={{
-            background: `url(${
-              isChoosed ? after : before.src
-            }) center no-repeat`,
+            zIndex: 1000,
+            position: 'fixed',
+            top: '0',
+            left: `${pos}%`,
+          }}
+          onTouchMove={touchMove}
+        >
+          <Image src={progress} style="height:76vh" mode="heightFix" />
+        </View>
+        <View
+          className="image"
+          style={{
+            background: `url(${before.src}) center no-repeat`,
             backgroundSize: 'cover',
           }}
           onClick={previewImage}
         />
       </View>
-
+      {isChoosed && (
+        <View
+          className="image after"
+          style={{
+            background: `url(${after}) center no-repeat`,
+            backgroundSize: 'cover',
+            zIndex: 900,
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            height: '76vh',
+            width: `${pos}%`,
+          }}
+          onClick={previewImage}
+        />
+      )}
       <View className="foot">
         <View className="custom" onClick={onUploadMakeup}>
           <View
